@@ -41,6 +41,11 @@ public class ProductController {
     public String addProduct(@Validated @ModelAttribute ProductCreateDto productCreateDto,
                              BindingResult bindingResult,
                              Model model) {
+        // 특정 필드 오류가 아닌 전제 예외 처리
+        int result = productCreateDto.getPrice() * productCreateDto.getQuantity();
+        if(result == 0){
+            bindingResult.reject("global_quantity", new Object[]{0, result},null);
+        }
 
         boolean b1 = bindingResult.hasErrors();
         boolean b2 = bindingResult.hasFieldErrors();
