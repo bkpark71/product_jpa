@@ -37,8 +37,8 @@ public class ProductController {
         return "product/productForm";
     }
 
-    @PostMapping("/add")
-    public String addProduct(@Validated @ModelAttribute ProductCreateDto productCreateDto,
+    @PostMapping("/add") // @ModelAttribute("product") 수정
+    public String addProduct(@Validated @ModelAttribute("product") ProductCreateDto productCreateDto,
                              BindingResult bindingResult,
                              Model model) {
         // 특정 필드 오류가 아닌 전제 예외 처리
@@ -82,8 +82,8 @@ public class ProductController {
         return "product/productUpdate";
     }
 
-    @PostMapping("/update")
-    public String updateProduct(@Validated @ModelAttribute ProductUpdateDto productUpdateDto) {
+    @PostMapping("/update")  // @ModelAttribute("product") 수정
+    public String updateProduct(@Validated @ModelAttribute("product") ProductUpdateDto productUpdateDto) {
         productService.updateProduct(productUpdateDto);
         return "redirect:/product/list";
     }

@@ -20,19 +20,24 @@
 <!--<div class="container">-->
     <h2 th:text="#{page.productForm}">상품등록</h2>
     <form action="/product/add" method="post" th:object="${product}">
+        <div th:if="${#fields.hasGlobalErrors()}">
+            <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">
+                글로벌 오류 메시지
+            </p>
+        </div>
         <div>
             <label for="name" th:text="#{label.name}">상품명</label>
-            <input type="text" th:field="*{name}" placeholder="상품명을 입력하세요">
+            <input type="text" th:field="*{name}" th:errorclass="field-error" placeholder="상품명을 입력하세요">
             <div class="field-error" th:errors="*{name}"> 상품명 오류 </div>
         </div>
         <div>
             <label for="price" th:text="#{label.price}">상품명</label>
-            <input type="number" th:field="*{price}" placeholder="상품가격을 입력하세요">
+            <input type="number" th:field="*{price}" th:errorclass="field-error" placeholder="상품가격을 입력하세요">
             <div class="field-error" th:errors="*{price}"> 상품가격오류 </div>
         </div>
         <div>
             <label for="quantity" th:text="#{label.quantity}">상품명</label>
-            <input type="number" th:field="*{quantity}" placeholder="재고수량을 입력하세요">
+            <input type="number" th:field="*{quantity}" th:errorclass="field-error" placeholder="재고수량을 입력하세요">
             <div class="field-error" th:errors="*{quantity}">재고수량오류 </div>
         </div>
         <input type="submit" th:value="#{button.save}">
