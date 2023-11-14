@@ -1,5 +1,6 @@
 package com.example.order_jpa.dto;
 
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -13,6 +14,10 @@ public class ProductUpdateDto {
     @NotNull
     @NotBlank
     private String name;
+    @NotNull
     @Range(min=100, max=1_000_000)
-    private int price;
+    private Integer price;
+//    @NotNull
+//    @Max(value = 9999)
+//    private Integer quantity;
 }

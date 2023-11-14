@@ -32,7 +32,7 @@
         </div>
         <div>
             <label for="price" th:text="#{label.price}">상품명</label>
-            <input type="number" th:field="*{price}" th:errorclass="field-error" placeholder="상품가격을 입력하세요">
+            <input type="text" th:field="*{price}" th:errorclass="field-error" placeholder="상품가격을 입력하세요">
             <div class="field-error" th:errors="*{price}"> 상품가격오류 </div>
         </div>
         <div>
