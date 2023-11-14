@@ -1,10 +1,9 @@
 package com.example.order_jpa.controller;
 
-import com.example.order_jpa.dto.ProductCreateDto;
-import com.example.order_jpa.dto.ProductUpdateDto;
+import com.example.order_jpa.formDto.ProductCreateDto;
+import com.example.order_jpa.formDto.ProductUpdateDto;
 import com.example.order_jpa.entity.Product;
 import com.example.order_jpa.service.ProductService;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
@@ -13,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -82,13 +82,22 @@ public class ProductController {
     @GetMapping("/update/{productId}")
     public String updateProduct(Model model, @PathVariable Long productId) {
         Product product = productService.getProductInfo(productId);
+        model.addAttribute("productId", productId);
         model.addAttribute("product", product);
         return "product/productUpdate";
     }
 
-    @PostMapping("/update")  // @ModelAttribute("product") 수정
-    public String updateProduct(@Validated @ModelAttribute("product") ProductUpdateDto productUpdateDto) {
-        productService.updateProduct(productUpdateDto);
-        return "redirect:/product/list";
+    @PostMapping("/update/{productId}")  // @ModelAttribute("product") 수정
+    public String updateProduct(@PathVariable Long productId,
+            @Validated @ModelAttribute("product") ProductUpdateDto productUpdateDto,
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes) {
+        if(bindingResult.hasErrors()) {
+            return "product/productUpdate";
+        }
+        productService.updateProduct(productId, productUpdateDto);
+        //redirectAttributes.addAttribute("productId", productId);
+        redirectAttributes.addAttribute("result", true);
+        return "redirect:/product/info/{productId}" ;
     }
 }

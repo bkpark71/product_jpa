@@ -1,16 +1,13 @@
-package com.example.order_jpa.dto;
+package com.example.order_jpa.formDto;
 
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.validator.constraints.Range;
 
 @Data
 public class ProductUpdateDto {
-    private Long productId;  // readonly
+    //private Long productId;  // readonly
     @NotNull
     @NotBlank
     private String name;
@@ -19,5 +16,5 @@ public class ProductUpdateDto {
     private Integer price;
 //    @NotNull
 //    @Max(value = 9999)
-//    private Integer quantity;
+//    private Integer quantity;di
 }

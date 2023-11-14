@@ -3,19 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="#{page.productUpdate}">상품상세</title>
+    <style>
+        .field-error {
+            border-color:red;
+            color: red;
+        }
+    </style>
 </head>
 <body>
-    <form action="/product/update" method="post" th:object="${product}">
+    <form th:action method="post" th:object="${product}">
 <!--        model 로 product을 넘겨줘야 th:object과 th:field 와 th:value를 사용할 수 있음 -->
         <label for="productId" th:text="#{label.productId}">상품id</label>
-        <input type="text" th:field="*{productId}" readonly>
+        <input type="text" id="productId" th:value="${productId}" readonly>
         <label for="name" th:text="#{label.name}">상품명</label>
         <input type="text" th:field="*{name}">
+        <div class="field-error" th:errors="*{name}"> 상품명 오류 </div>
         <label for="price" th:text="#{label.price}">상품가격</label>
+        <div class="field-error" th:errors="*{price}"> 상품가격오류 </div>
         <input type="text" th:field="*{price}">
         <label for="quantity" th:text="#{label.quantity}">재고수량</label>
-        <input type="text" th:field="*{quantity}" readonly>
+<!--        <input type="text" th:field="*{quantity}" readonly>-->
         <input type="submit" th:value="#{button.update}" value="상품수정">
+
+        <div th:if="${#fields.hasGlobalErrors()}">
+            <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">
+                글로벌 오류 메시지
+            </p>
+        </div>
+
     </form>
+
+
 </body>
 </html>

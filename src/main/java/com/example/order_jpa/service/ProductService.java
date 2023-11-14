@@ -1,7 +1,8 @@
 package com.example.order_jpa.service;
 
-import com.example.order_jpa.dto.ProductCreateDto;
-import com.example.order_jpa.dto.ProductUpdateDto;
+import com.example.order_jpa.apiDtio.ProductApiCreateDto;
+import com.example.order_jpa.formDto.ProductCreateDto;
+import com.example.order_jpa.formDto.ProductUpdateDto;
 import com.example.order_jpa.entity.Product;
 import com.example.order_jpa.repository.JPAProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,14 @@ public class ProductService {
         productRepository.save(product);
     }
 
+    public void addProductApi(ProductApiCreateDto productCreateDto) {
+        Product product = new Product();
+        product.setName(productCreateDto.getName());
+        product.setPrice(productCreateDto.getPrice());
+        product.setQuantity(productCreateDto.getQuantity());
+        productRepository.save(product);
+    }
+
     public void deleteProduct(long productId) {
         Product product = productRepository.findById(productId);
         productRepository.remove(product);
@@ -37,8 +46,8 @@ public class ProductService {
         return productRepository.findById(productId);
     }
 
-    public void updateProduct(ProductUpdateDto productUpdateDto) {
-        Product product = productRepository.findById(productUpdateDto.getProductId());
+    public void updateProduct(Long productId, ProductUpdateDto productUpdateDto) {
+        Product product = productRepository.findById(productId);
         product.setName(productUpdateDto.getName());
         product.setPrice(productUpdateDto.getPrice());
 //        product.setQuantity(productUpdateDto.getQuantity());

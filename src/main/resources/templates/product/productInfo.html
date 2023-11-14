@@ -6,6 +6,7 @@
 </head>
 <body>
     <div>
+        <h3 th:if="${param.result}" th:text="|수정 완료|">수정이 정상적으로 완료되었습니다.</h3>
 <!--        th:object="${product}">-->
         상품id<input type="text" th:value="${product.productId}" readonly>
         상품명<input type="text" th:value="${product.name}" readonly>

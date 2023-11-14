@@ -1,16 +1,14 @@
-package com.example.order_jpa.dto;
+package com.example.order_jpa.apiDtio;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.validator.constraints.Range;
 
 @Data
-public class ProductCreateDto {
+public class ProductApiCreateDto {
     @NotNull (message="product name은 null이 입력되면 안됩니다.")
     @NotBlank (message="product name은 반드시 입력해야 합니다.")
     @NotEmpty (message="product name은 반드시 입력해야 합니다.")
